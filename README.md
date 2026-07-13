@@ -1,5 +1,5 @@
 <!-- ============ TITLE BANNER ============ -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=220&section=header&text=Welcome%20to%20my%20profile!&fontSize=52&fontColor=ffffff&fontAlignY=38&animation=twinkling&desc=Glad%20you're%20here%20%E2%9C%A8&descAlignY=58&descSize=18" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=220&section=header&text=Anurag%20Patel%20!&fontSize=52&fontColor=ffffff&fontAlignY=38&animation=twinkling&desc=Glad%20you're%20here%20%E2%9C%A8&descAlignY=58&descSize=18" width="100%" />
 
 <!-- ============ ANIMATED TYPING SUBTITLE ============ -->
 <div align="center">
