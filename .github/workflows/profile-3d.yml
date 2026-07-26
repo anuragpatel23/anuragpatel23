@@ -12,22 +12,31 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: generate-github-profile-3d-contrib
+    permissions:
+      contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: lowlighter/metrics@latest
+        with:
+          # Use a fine-grained PAT or classic PAT with read:user scope
+          # stored as METRICS_TOKEN in repo Settings → Secrets → Actions
+          # If you don't have one yet, GITHUB_TOKEN works but may hit rate limits
+          token: ${{ secrets.METRICS_TOKEN || secrets.GITHUB_TOKEN }}
 
-      - uses: yoshi389111/github-profile-3d-contrib@0.7.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USERNAME: anuragpatel23
-          # No SETTING_JSON → generates ALL default themed SVGs,
-          # including profile-night-rainbow.svg used in the README
+          user: anuragpatel23
 
-      - name: Commit & Push generated SVGs
-        run: |
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          git add -A .
-          git diff --cached --quiet || git commit -m "chore: regenerate 3D contribution calendar [skip ci]"
-          git push
+          # Output goes to profile-3d-contrib/profile-night-rainbow.svg on main
+          filename: profile-3d-contrib/profile-night-rainbow.svg
+          output_action: commit
+          committer_branch: main
+          committer_message: "chore: regenerate 3D contribution calendar [skip ci]"
+
+          # Minimal base — only the isocalendar plugin
+          template: classic
+          base: ""
+          config_output: svg
+          config_padding: 6, 10
+
+          # Isometric contribution calendar (the 3D-looking one)
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
