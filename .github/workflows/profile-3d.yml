@@ -21,27 +21,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: anuragpatel23
-          # Options: dracula / green_ap / monokai / nord / radical / solarized / vue
-          SETTING_JSON: |
-            {
-              "githubUserName": "anuragpatel23",
-              "type": "NORMAL",
-              "angle": 40,
-              "themeContext": {
-                "backgroundColor": "#141321",
-                "foregroundColor": "#ffffff",
-                "panelColor": "#1f1f2e",
-                "panelBorderColor": "#36BCF7",
-                "calendarTableColor": "#1f1f2e",
-                "commitHintColor": "#36BCF7",
-                "commitTextColor": "#ffffff",
-                "contribCircleColor": "#ff6e96",
-                "floatNightLightColor": "#36BCF799",
-                "textColor": "#c3c3c3",
-                "monthTextColor": "#ffffff",
-                "cornerLampLightColor": "#36BCF7"
-              }
-            }
+          # No SETTING_JSON → generates ALL default themed SVGs,
+          # including profile-night-rainbow.svg used in the README
 
       - name: Commit & Push generated SVGs
         run: |
