@@ -1,0 +1,52 @@
+name: 🧊 Generate 3D Contribution Calendar
+
+on:
+  schedule:
+    # Runs daily at 18:00 UTC
+    - cron: "0 18 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: generate-github-profile-3d-contrib
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: yoshi389111/github-profile-3d-contrib@0.7.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: anuragpatel23
+          # Options: dracula / green_ap / monokai / nord / radical / solarized / vue
+          SETTING_JSON: |
+            {
+              "githubUserName": "anuragpatel23",
+              "type": "NORMAL",
+              "angle": 40,
+              "themeContext": {
+                "backgroundColor": "#141321",
+                "foregroundColor": "#ffffff",
+                "panelColor": "#1f1f2e",
+                "panelBorderColor": "#36BCF7",
+                "calendarTableColor": "#1f1f2e",
+                "commitHintColor": "#36BCF7",
+                "commitTextColor": "#ffffff",
+                "contribCircleColor": "#ff6e96",
+                "floatNightLightColor": "#36BCF799",
+                "textColor": "#c3c3c3",
+                "monthTextColor": "#ffffff",
+                "cornerLampLightColor": "#36BCF7"
+              }
+            }
+
+      - name: Commit & Push generated SVGs
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add -A .
+          git diff --cached --quiet || git commit -m "chore: regenerate 3D contribution calendar [skip ci]"
+          git push
